@@ -307,3 +307,141 @@ Therefore, addressing cigarette butt pollution on our campus is both **important
 
 Slaughter, E. et al. (2011). *Toxicity of cigarette butts, and their chemical components to marine and freshwater fish.* **Tobacco Control**, 20(Suppl 1), i25–i29.  
 https://pmc.ncbi.nlm.nih.gov/articles/PMC3088407/
+
+
+
+
+
+
+# 📊 DiDE Data Collection Analysis and Spatial Evaluation
+
+## **1. Objective and Motivation**
+
+The main objective of this study is to evaluate spatial event data collected via the DiDE platform by focusing on **data quality rather than data quantity**, and to analytically determine the **most effective data collector** among users.
+
+Instead of simply counting observations, this analysis is designed to answer the following key questions:
+
+- How **spatially extensive** is the data collected by each user?
+- Is the data collected across **multiple days**, or concentrated in a single session?
+- Does the user collect **diverse types of events**?
+- Are observations **spatially distributed**, or clustered in a limited area?
+
+This approach aligns directly with the course requirement emphasizing **spatial coverage and meaningful sampling**, rather than repeatedly collecting data from closely spaced locations.
+
+---
+
+## **2. Data Source and Preprocessing**
+
+The dataset used in this study is stored in a PostgreSQL + PostGIS environment within the `dide_events` table.
+
+Each record includes:
+- A geometry field (`geom`) representing the spatial location
+- A `properties` JSON field containing metadata such as:
+  - `created_by`
+  - `created_by_id`
+  - event-related attributes
+
+SQL was used extensively to extract, aggregate, and prepare the data for analytical evaluation.
+
+---
+
+## **3. Initial Filtering: Identifying the Top 10 Users**
+
+As a first step, SQL queries were used to identify the **top 10 users** based on the total number of observations.
+
+However, the selection was **not based solely on observation count**. For each of the top 10 users, the following metrics were computed:
+
+- **n_obs**: Total number of collected observations  
+- **days_active**: Number of distinct days with data collection  
+- **type_count**: Number of different event types collected  
+- **bbox_area_m2**: Approximate spatial coverage area  
+
+![WhatsApp Image 2025-12-29 at 21 51 42](https://github.com/user-attachments/assets/9b35349b-bcef-4561-af5a-4c76738a5ce9)
+
+These metrics were combined into a comprehensive summary table.
+
+## **4. Score-Based Evaluation and Ranking**
+
+To further refine the analysis and reduce visual complexity in later spatial visualizations, a **composite partner score** was calculated for each user.
+
+The score incorporates weighted contributions from:
+- Spatial coverage (area)
+- Temporal consistency (days active)
+- Data diversity (event types)
+- Spatial dispersion (distance-based metrics)
+
+After computing this score, users were ranked from highest to lowest.
+
+At this stage:
+- The user **heis** achieved the **highest overall score**
+- This ranking justified narrowing the analysis to a **Top 5 user subset**
+  
+![WhatsApp Image 2025-12-29 at 21 52 45](https://github.com/user-attachments/assets/0ed9870d-bb61-41c9-8387-e7e5075dec9c)
+
+## **5. Spatial Visualization in QGIS – Map 1 (Comparative View)**
+
+In the first map, the **Top 5 users** were visualized together on the campus map using QGIS.
+
+Design decisions:
+- Each user was assigned a **distinct color**
+- All points were rendered with **equal symbol size**
+- OpenStreetMap was used as the basemap
+
+This visualization enables a direct comparison of spatial behavior and coverage.
+
+![WhatsApp Image 2025-12-29 at 21 51 06](https://github.com/user-attachments/assets/424f18b2-a2c4-4df7-8137-82a552883d08)
+
+## **6. Focused Visualization – Map 2 (Emphasis on heis)**
+
+A second map was created to emphasize the selected partner.
+
+In this map:
+- **heis** is shown in **red**
+- All other users are displayed in **light gray**
+- Symbol sizes remain constant to avoid visual bias
+
+This design highlights the spatial reach and consistency of heis relative to others.
+
+![WhatsApp Image 2025-12-29 at 21 51 06 (1)](https://github.com/user-attachments/assets/3959e1a3-10c7-493a-aa7d-034ea9701b53)
+
+
+## **7. Observational Review of Uploaded Images**
+
+Beyond spatial metrics, the images uploaded by **heis** were manually reviewed.
+
+The review confirmed that:
+- Images are relevant to the reported event types
+- Visual content is clear and informative
+- Observations are contextually meaningful
+
+This supports the conclusion that data quality extends beyond spatial distribution to include **content accuracy and clarity**.
+
+![WhatsApp Image 2025-12-29 at 23 22 12](https://github.com/user-attachments/assets/e5b1b4ef-6759-4178-9375-7c058a68ab62) 
+
+
+## **8. Results and Interpretation**
+
+This analysis demonstrates that:
+- High-quality data collection is defined by **spatial coverage, temporal consistency, and diversity**
+- Dense clustering alone does not indicate effective sampling
+- Multi-criteria evaluation provides a fair and transparent comparison framework
+
+The user **heis** stands out by demonstrating a **balanced and methodical data collection strategy**.
+
+---
+
+## **9. Tools and Technologies Used**
+
+- **PostgreSQL + PostGIS** – Spatial data storage and querying  
+- **SQL (CTEs, aggregation, scoring)** – Analytical processing  
+- **QGIS** – Spatial visualization and cartography  
+- **OpenStreetMap** – Basemap provider  
+
+---
+
+## **10. Conclusion**
+
+This README documents not only the final outcome but also the **analytical reasoning and methodological decisions** behind the selection process.
+
+The emphasis of this study is placed on **why** each step was performed, ensuring transparency and academic rigor.
+
