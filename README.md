@@ -417,6 +417,7 @@ The review confirmed that:
 This supports the conclusion that data quality extends beyond spatial distribution to include **content accuracy and clarity**.
 
 ![WhatsApp Image 2025-12-29 at 23 22 12](https://github.com/user-attachments/assets/e5b1b4ef-6759-4178-9375-7c058a68ab62) 
+<img width="411" height="514" alt="image" src="https://github.com/user-attachments/assets/b1f54f18-5df4-421f-934c-f1d9ebba2e8a" />
 
 
 ## **8. Results and Interpretation**
